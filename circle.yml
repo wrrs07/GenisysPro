@@ -19,5 +19,4 @@ dependencies:
 
 test:
   override:
-    - ./CI-Test/Travis.sh $PHP_ENVIROMENT
-    - cp -rv ./plugins/DevTools/ $CIRCLE_ARTIFACTS
+    - ./ci/run.sh
