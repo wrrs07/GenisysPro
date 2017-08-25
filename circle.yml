@@ -20,6 +20,6 @@ dependencies:
 
 test:
   override:
-    - ./ci/run.sh $PHP_ENVIROMENT
+    - . ./CI-Test/Travis.sh $PHP_ENVIROMENT
     - 'printf "#$CIRCLE_BUILD_NUM for branch \"$CIRCLE_BRANCH\" created by $CIRCLE_USERNAME\nMore build information here: $CIRCLE_BUILD_URL\nChanges: $CIRCLE_COMPARE_URL" >> message.txt'
-   - cp -rv ./plugins/DevTools/ $CIRCLE_ARTIFACTS
+    - cp -rv ./plugins/DevTools/ $CIRCLE_ARTIFACTS
