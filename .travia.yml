@@ -1,0 +1,29 @@
+sudo: false
+
+language: php
+php:
+ - 7.0
+
+before_script:
+ - phpenv config-rm xdebug.ini
+ - pecl install channel://pecl.php.net/pthreads-3.1.6
+ - pecl install channel://pecl.php.net/weakref-0.3.3
+ - echo | pecl install channel://pecl.php.net/yaml-2.0.0
+
+script:
+ - ./ci/run.sh
+
+notifications:
+  email: true
+
+before_deploy:
+ - mv plugins/GenisysPro/GenisysPro*.phar plugins/GenisysPro/GenisysPro.phar
+deploy:
+  - provider: releases
+    api_key:
+      secure: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDnvnNugAVBb5jEWHvCewIVmzHLcbcaS3V2wFcDIftVxk+YlRM0JcoEGVGfxwiMRGOUBdIXhqM6HnpzK0y0rpd7Gss3dZRg1OUZGaPBCpNCmN2lVqZHA4PjPQRun734SPhFmvjPzYExEJqI78HI9AOXJp6gXzHE1iPQ3H8Kg98i+I1uRA6WCobwKIYusrPDu/94QdDuEyfjhIbaC4UvPIsdRmCJunsBO7lPn/fggIQgtnXMCV5nzInZW3TDFcQte7qsLdD9a5hoJM5riTek5yrBc33tqWOqjTRtts7XyHi+9uM6rFwmvIl/Jy7b/AXTNgHaMA3VZGXz7ynqTOT8+z280dXEWf0NuDyt0oniEWxGPp7EyL1+zXntQR25bvjaSxJHJPSJDUFen78eGyvycxD++c+/8H9OmM76BQFG44ArpHrW46d3vBX4VoVpYO8JvREoGpwx6oQPy+8XEt955CUQjAyuN0+RuMPyyjbYaGQ2Dfw9JmJCNJMyCPajxzzTsgs= paypalwilirodin@gmail.com
+    file_glob: true
+    file: plugins/GenisysPro/*
+    skip_cleanup: true
+    on:
+      tags: true
